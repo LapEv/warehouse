@@ -1,0 +1,12 @@
+{
+  "name": "warehouse",
+  "displayName": "warehouse",
+  "expo": {
+    "name": "warehouse",
+    "slug": "warehouse",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
