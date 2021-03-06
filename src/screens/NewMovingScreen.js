@@ -4,15 +4,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { CONST } from '../const';
 
 export const NewMovingScreen = () => {
-  // state = { currentUser: null }
-
   return (
     <View style={styles.container}>
       <LinearGradient
         colors={CONST.MAIN_BACKGROUNDCOLOR}
         style={CONST.MAIN_BACKGROUNDSTYLES}
       >
-        <Text>New Moving Screen!</Text>
+        <Text style={{ color: CONST.TEXT_COLOR }}>New Moving Screen!</Text>
       </LinearGradient>
     </View>
   );

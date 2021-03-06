@@ -1,5 +1,5 @@
 export const CONST = {
-  ratioScreen: 90,
+  ratioScreen: 85,
   use_PIN_CODE: true, // передать в пользовательские настройки
   use_fingerprint: true, // передать в пользовательские настройки
   supportFingerPrint: false,
@@ -25,11 +25,16 @@ export const CONST = {
     //     ? '#0e4a75' : "#fff"
     // },
     headerStyle: {
-      backgroundColor: '#0e4a75',
+      backgroundColor: '#30cfd0',
     },
     headerTintColor: '#fff',
     // headerTintColor: Platform.OS === 'android'
     // ? "#fff" : ['#146185', '#30cfd0']
+  },
+  HEADER_OPTIONS: {
+    mainBackground: false,
+    drawerIcon: 'ios-menu',
+    backgroundColor: ['#30cfd0', '#146185'],
   },
   // firebaseConfig : {
   //   apiKey: 'AIzaSyAvYSioiBQ-_r85JpC5qriziK95MMfgM0A',
