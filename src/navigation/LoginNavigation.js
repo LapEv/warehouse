@@ -6,6 +6,7 @@ import { LoginScreen } from '../screens/LoginScreen';
 import { ResetPasswordScreen } from '../screens/ResetPasswordScreen';
 import { PinCodeScreen } from '../screens/PinCodeScreen.js';
 import { CONST } from '../const';
+import { Header } from '../components/Header';
 
 const LoginNavigator = createStackNavigator();
 
@@ -41,10 +42,11 @@ export const Login = () => {
       <LoginNavigator.Screen
         name="PinCodeScreen"
         component={PinCodeScreen}
-        options={{
-          headerShown: false,
-          title: 'Настройка пин кода',
-        }}
+        // options={{
+        //   headerShown: false,
+        //   title: 'Настройка пин кода',
+        // }}
+        options={(route) => Header(route)}
       />
     </LoginNavigator.Navigator>
   );

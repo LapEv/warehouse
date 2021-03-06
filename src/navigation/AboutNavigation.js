@@ -1,9 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AboutScreen } from "../screens/AboutScreen"
-import { CONST } from '..//const'
+import { AboutScreen } from '../screens/AboutScreen';
+import { CONST } from '..//const';
+import { LabelConstants } from '..//labelConstants';
+import { Header } from '../components/Header';
 
-const AboutNavigator = createStackNavigator()
+const AboutNavigator = createStackNavigator();
 
 export const About = () => {
   return (
@@ -12,10 +14,10 @@ export const About = () => {
       screenOptions={CONST.SCREEN_OPTIONS}
     >
       <AboutNavigator.Screen
-        name="About"
+        name={'About'}
         component={AboutScreen}
-        options = {AboutScreen.navigationOption}
+        options={(route) => Header(route)}
       />
     </AboutNavigator.Navigator>
-  )
-}
+  );
+};

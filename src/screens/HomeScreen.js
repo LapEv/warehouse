@@ -5,8 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { CONST } from '../const';
 
 export const HomeScreen = () => {
-  // state = { currentUser: null }
-
   const { currentUser } = firebase.auth();
 
   return (
@@ -15,7 +13,9 @@ export const HomeScreen = () => {
         colors={CONST.MAIN_BACKGROUNDCOLOR}
         style={CONST.MAIN_BACKGROUNDSTYLES}
       >
-        <Text>Hi {currentUser && currentUser.email}!</Text>
+        <Text style={{ color: CONST.TEXT_COLOR }}>
+          Hi {currentUser && currentUser.email}!
+        </Text>
       </LinearGradient>
     </View>
   );

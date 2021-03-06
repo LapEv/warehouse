@@ -12,7 +12,7 @@ export const SettingsScreen = () => {
         colors={CONST.MAIN_BACKGROUNDCOLOR}
         style={CONST.MAIN_BACKGROUNDSTYLES}
       >
-        <Text>Settings Screen!</Text>
+        <Text style={{ color: CONST.TEXT_COLOR }}>Settings Screen!</Text>
       </LinearGradient>
     </View>
   );

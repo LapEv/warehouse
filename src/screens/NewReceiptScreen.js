@@ -12,7 +12,7 @@ export const NewReceiptScreen = () => {
         colors={CONST.MAIN_BACKGROUNDCOLOR}
         style={CONST.MAIN_BACKGROUNDSTYLES}
       >
-        <Text>New Receipt Screen!</Text>
+        <Text style={{ color: CONST.TEXT_COLOR }}>New Receipt Screen!</Text>
       </LinearGradient>
     </View>
   );

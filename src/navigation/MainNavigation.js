@@ -2,16 +2,16 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CustomDrawer } from '..//components/CustomDrawer';
-import { HomeScreen } from '../screens/HomeScreen';
-import { NewMovingScreen } from '../screens/NewMovingScreen';
-import { NewReceiptScreen } from '../screens/NewReceiptScreen';
-import { SettingsScreen } from '../screens/SettingsScreen';
+import { About } from '..//navigation/AboutNavigation';
+import { Home } from './HomeNavigation';
+import { NewMoving } from './NewMovingNavigation';
+import { NewReceipt } from './NewReceiptNavigation';
+import { Settings } from './SettingsNavigation';
 import {
   MaterialIcons,
   MaterialCommunityIcons,
   Ionicons,
 } from '@expo/vector-icons';
-
 import { CONST } from '../const';
 
 const MainNavigator = createDrawerNavigator();
@@ -49,19 +49,19 @@ export const Main = () => {
       }}
     >
       <MainNavigator.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="Home"
+        component={Home}
         backBehavior="none"
         options={{
           drawerIcon: () => <Ionicons name="home" size={30} color={'#fff'} />,
           title: 'Главная',
         }}
-        // options={{ headerShown: false }}
       />
       <MainNavigator.Screen
-        name="NewMovingScreen"
-        component={NewMovingScreen}
+        name="NewMoving"
+        component={NewMoving}
         backBehavior="none"
+        hideStatusBar="true"
         options={{
           drawerIcon: () => (
             <MaterialCommunityIcons
@@ -72,31 +72,40 @@ export const Main = () => {
           ),
           title: 'Новое перемещение',
         }}
-        // options={{ headerShown: false }}
       />
       <MainNavigator.Screen
-        name="NewReceiptScreen"
-        component={NewReceiptScreen}
+        name="NewReceipt"
+        component={NewReceipt}
         backBehavior="none"
+        hideStatusBar="true"
         options={{
           drawerIcon: () => (
             <MaterialIcons name="library-add" size={30} color={'#fff'} />
           ),
           title: 'Новое поступление',
         }}
-        // options={{ headerShown: false }}
       />
       <MainNavigator.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
+        name="Settings"
+        component={Settings}
         backBehavior="none"
+        hideStatusBar="true"
         options={{
           drawerIcon: () => (
             <Ionicons name="md-settings-sharp" size={30} color={'#fff'} />
           ),
           title: 'Настройки',
         }}
-        // options={{ headerShown: false }}
+      />
+      <MainNavigator.Screen
+        name="About"
+        component={About}
+        hideStatusBar="true"
+        backBehavior="none"
+        options={{
+          drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,
+          title: 'О приложении',
+        }}
       />
     </MainNavigator.Navigator>
   );
