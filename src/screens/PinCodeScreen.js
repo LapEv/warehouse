@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import PINCode, { hasUserSetPinCode } from '@haskkor/react-native-pincode';
 import { CONST } from '../const';
-// import firebase from 'firebase';
-// import { LinearGradient } from 'expo-linear-gradient';
-// import * as LocalAuthentication from 'expo-local-authentication';
-// import { CONST } from '../const'
+import { CustomHeader } from '../components/CustomHeader';
 
 export const PinCodeScreen = ({ navigation }) => {
   const [showPinLock, setShowPinLock] = useState(false);
   // const [PINCodeStatus, setPINCodeStatus] = useState("choose")
   const [PINCodeStatus, setPINCodeStatus] = useState('enter');
 
-  const pinCodeKeychainName = 'Ware0809House';
+  const pinCodeKeychainName = CONST.KeychainName;
 
   const finishProcess = async () => {
     const hasPin = await hasUserSetPinCode(pinCodeKeychainName);
@@ -29,6 +26,7 @@ export const PinCodeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <CustomHeader title="" navigation={navigation} />
       {!showPinLock && (
         <PINCode
           status={PINCodeStatus}

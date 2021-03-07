@@ -2,13 +2,13 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CustomDrawer } from '..//components/CustomDrawer';
-import { About } from '..//navigation/AboutNavigation';
-import { Home } from './HomeNavigation';
-import { NewMoving } from './NewMovingNavigation';
-import { NewReceipt } from './NewReceiptNavigation';
-import { Settings } from './SettingsNavigation';
-import { Support } from './SupportNavigation';
-import { Notifications } from './NotificationsNavigation';
+import { HomeScreen } from '../screens/HomeScreen';
+import { NewMovingScreen } from '../screens/NewMovingScreen';
+import { NewReceiptScreen } from '../screens/NewReceiptScreen';
+import { SettingsScreen } from '../screens/SettingsScreen';
+import { SupportScreen } from '../screens/SupportScreen';
+import { AboutScreen } from '../screens/AboutScreen';
+import { NotificationsScreen } from '../screens/NotificationsScreen';
 import {
   MaterialIcons,
   MaterialCommunityIcons,
@@ -52,7 +52,7 @@ export const Main = () => {
     >
       <MainNavigator.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         backBehavior="none"
         options={{
           drawerIcon: () => <Ionicons name="home" size={30} color={'#fff'} />,
@@ -61,7 +61,7 @@ export const Main = () => {
       />
       <MainNavigator.Screen
         name="NewMoving"
-        component={NewMoving}
+        component={NewMovingScreen}
         backBehavior="none"
         hideStatusBar="true"
         options={{
@@ -77,7 +77,7 @@ export const Main = () => {
       />
       <MainNavigator.Screen
         name="NewReceipt"
-        component={NewReceipt}
+        component={NewReceiptScreen}
         backBehavior="none"
         hideStatusBar="true"
         options={{
@@ -89,7 +89,7 @@ export const Main = () => {
       />
       <MainNavigator.Screen
         name="Settings"
-        component={Settings}
+        component={SettingsScreen}
         backBehavior="none"
         hideStatusBar="true"
         options={{
@@ -101,7 +101,7 @@ export const Main = () => {
       />
       <MainNavigator.Screen
         name="Support"
-        component={Support}
+        component={SupportScreen}
         backBehavior="none"
         hideStatusBar="true"
         options={{
@@ -113,7 +113,7 @@ export const Main = () => {
       />
       <MainNavigator.Screen
         name="About"
-        component={About}
+        component={AboutScreen}
         hideStatusBar="true"
         backBehavior="none"
         options={{
@@ -123,7 +123,7 @@ export const Main = () => {
       />
       <MainNavigator.Screen
         name="Notifications"
-        component={Notifications}
+        component={NotificationsScreen}
         hideStatusBar="true"
         backBehavior="none"
         options={{

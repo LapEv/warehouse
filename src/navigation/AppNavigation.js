@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CustomDrawer } from '..//components/CustomDrawer';
 import { Main } from '../navigation/MainNavigation';
-import { About } from '..//navigation/AboutNavigation';
+import { AboutScreen } from '../screens/AboutScreen';
 import { Login } from '..//navigation/LoginNavigation';
-import { Support } from '..//navigation/SupportNavigation';
+import { SupportScreen } from '../screens/SupportScreen';
 import { CONST } from '../const';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 
@@ -56,7 +56,7 @@ export const AppNavigation = () => {
         />
         <Drawer.Screen
           name="Support"
-          component={Support}
+          component={SupportScreen}
           hideStatusBar="true"
           options={{
             drawerIcon: () => (
@@ -67,7 +67,7 @@ export const AppNavigation = () => {
         />
         <Drawer.Screen
           name="About"
-          component={About}
+          component={AboutScreen}
           hideStatusBar="true"
           options={{
             drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,

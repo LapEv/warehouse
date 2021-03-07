@@ -3,6 +3,7 @@ export const CONST = {
   use_PIN_CODE: true, // передать в пользовательские настройки
   use_fingerprint: true, // передать в пользовательские настройки
   supportFingerPrint: false,
+  KeychainName: 'Ware0809House',
   isLogged: false,
   // requiredInstallPIN_CODE: true,
   MAIN_BACKGROUNDCOLOR: ['#30cfd0', '#146185', '#30cfd0'],
@@ -19,6 +20,11 @@ export const CONST = {
   },
   TEXT_COLOR: 'white',
   DANGER_COLOR: '#d81b60',
+  SHADOW_FOR_IOS: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+  },
   SCREEN_OPTIONS: {
     gestureEnabled: false,
     // headerStyle: {

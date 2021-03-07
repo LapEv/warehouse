@@ -1,14 +1,17 @@
 import React from 'react';
-import { DrawerActions } from '@react-navigation/native';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { Item, HeaderButtons } from 'react-navigation-header-buttons';
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CONST } from '..//const';
+import { LabelConstants } from '../labelConstants';
+import { CustomHeader } from '../components/CustomHeader';
 
-export const AboutScreen = ({}) => {
+export const AboutScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
+      <CustomHeader
+        title={LabelConstants.headerTitle.about}
+        navigation={navigation}
+      />
       <LinearGradient colors={CONST.MAIN_BACKGROUNDCOLOR} style={styles.center}>
         <Text style={{ color: CONST.TEXT_COLOR }}>
           Это лучшее приложение для учета складских ценностей

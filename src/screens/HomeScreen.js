@@ -1,14 +1,20 @@
 import React from 'react';
-import { StyleSheet, Platform, Image, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CONST } from '../const';
+import { LabelConstants } from '../labelConstants';
+import { CustomHeader } from '../components/CustomHeader';
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }) => {
   const { currentUser } = firebase.auth();
 
   return (
     <View style={styles.container}>
+      <CustomHeader
+        title={LabelConstants.headerTitle.main}
+        navigation={navigation}
+      />
       <LinearGradient
         colors={CONST.MAIN_BACKGROUNDCOLOR}
         style={CONST.MAIN_BACKGROUNDSTYLES}
