@@ -24,28 +24,21 @@ export const Login = () => {
       <LoginNavigator.Screen
         name="SignUpScreen"
         component={SignUpScreen}
-        options={{ title: 'Регистрация' }}
-        options={{ headerShown: false }}
+        options={(route) => Header(route)}
       />
       <LoginNavigator.Screen
         name="LoginScreen"
         component={LoginScreen}
-        options={{ title: 'Авторизация' }}
-        options={{ headerShown: false }}
+        options={(route) => Header(route)}
       />
       <LoginNavigator.Screen
         name="ResetPasswordScreen"
         component={ResetPasswordScreen}
-        options={{ title: 'Сброс пароля' }}
-        options={{ headerShown: false }}
+        options={(route) => Header(route)}
       />
       <LoginNavigator.Screen
         name="PinCodeScreen"
         component={PinCodeScreen}
-        // options={{
-        //   headerShown: false,
-        //   title: 'Настройка пин кода',
-        // }}
         options={(route) => Header(route)}
       />
     </LoginNavigator.Navigator>

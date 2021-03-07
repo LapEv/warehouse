@@ -3,6 +3,7 @@ export const CONST = {
   use_PIN_CODE: true, // передать в пользовательские настройки
   use_fingerprint: true, // передать в пользовательские настройки
   supportFingerPrint: false,
+  isLogged: false,
   // requiredInstallPIN_CODE: true,
   MAIN_BACKGROUNDCOLOR: ['#30cfd0', '#146185', '#30cfd0'],
   MAIN_BUTTONS_BORDERRADIUS: 25,
@@ -34,6 +35,8 @@ export const CONST = {
   HEADER_OPTIONS: {
     mainBackground: false,
     drawerIcon: 'ios-menu',
+    settingsIcon: 'md-settings-sharp',
+    notificationsIcon: 'notifications',
     backgroundColor: ['#30cfd0', '#146185'],
   },
   // firebaseConfig : {

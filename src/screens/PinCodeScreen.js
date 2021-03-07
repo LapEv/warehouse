@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import PINCode, { hasUserSetPinCode } from '@haskkor/react-native-pincode';
+import { CONST } from '../const';
 // import firebase from 'firebase';
 // import { LinearGradient } from 'expo-linear-gradient';
 // import * as LocalAuthentication from 'expo-local-authentication';
@@ -20,6 +21,7 @@ export const PinCodeScreen = ({ navigation }) => {
         setPINCodeStatus('enter');
       } else {
         setShowPinLock(false);
+        CONST.isLogged = true;
         navigation.navigate('Main');
       }
     }

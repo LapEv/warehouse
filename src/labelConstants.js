@@ -5,5 +5,7 @@ export const LabelConstants = {
     newReceipt: 'Новое поступление',
     settings: 'Настройки',
     about: 'О приложении',
+    support: 'Написать в поддержку',
+    notifications: 'Уведомления',
   },
 };

@@ -6,8 +6,9 @@ import { CustomDrawer } from '..//components/CustomDrawer';
 import { Main } from '../navigation/MainNavigation';
 import { About } from '..//navigation/AboutNavigation';
 import { Login } from '..//navigation/LoginNavigation';
+import { Support } from '..//navigation/SupportNavigation';
 import { CONST } from '../const';
-import { Ionicons, Entypo } from '@expo/vector-icons';
+import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 
 const Drawer = createDrawerNavigator();
 
@@ -54,20 +55,32 @@ export const AppNavigation = () => {
           }}
         />
         <Drawer.Screen
+          name="Support"
+          component={Support}
+          hideStatusBar="true"
+          options={{
+            drawerIcon: () => (
+              <MaterialIcons name="email" size={30} color={'#fff'} />
+            ),
+            title: 'Написать в поддержку',
+          }}
+        />
+        <Drawer.Screen
+          name="About"
+          component={About}
+          hideStatusBar="true"
+          options={{
+            drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,
+            title: 'О приложении',
+          }}
+        />
+        <Drawer.Screen
           name="Main"
           component={Main}
           options={{ title: 'Главная' }}
           backBehavior="none"
           hideStatusBar="true"
           // options={{ headerShown: false }}
-        />
-        <Drawer.Screen
-          name="О приложении"
-          component={About}
-          hideStatusBar="true"
-          options={{
-            drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,
-          }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

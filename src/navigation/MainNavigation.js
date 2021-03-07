@@ -7,6 +7,8 @@ import { Home } from './HomeNavigation';
 import { NewMoving } from './NewMovingNavigation';
 import { NewReceipt } from './NewReceiptNavigation';
 import { Settings } from './SettingsNavigation';
+import { Support } from './SupportNavigation';
+import { Notifications } from './NotificationsNavigation';
 import {
   MaterialIcons,
   MaterialCommunityIcons,
@@ -30,10 +32,10 @@ export const Main = () => {
           state: {
             ...props.state,
             routeNames: props.state.routeNames.filter((routeName) => {
-              routeName !== 'Main1';
+              routeName !== 'Notifications';
             }),
             routes: props.state.routes.filter(
-              (route) => route.name !== 'Main1'
+              (route) => route.name !== 'Notifications'
             ),
           },
         };
@@ -92,9 +94,21 @@ export const Main = () => {
         hideStatusBar="true"
         options={{
           drawerIcon: () => (
-            <Ionicons name="md-settings-sharp" size={30} color={'#fff'} />
+            <MaterialIcons name="email" size={30} color={'#fff'} />
           ),
           title: 'Настройки',
+        }}
+      />
+      <MainNavigator.Screen
+        name="Support"
+        component={Support}
+        backBehavior="none"
+        hideStatusBar="true"
+        options={{
+          drawerIcon: () => (
+            <Ionicons name="md-settings-sharp" size={30} color={'#fff'} />
+          ),
+          title: 'Написать в поддержку',
         }}
       />
       <MainNavigator.Screen
@@ -105,6 +119,18 @@ export const Main = () => {
         options={{
           drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,
           title: 'О приложении',
+        }}
+      />
+      <MainNavigator.Screen
+        name="Notifications"
+        component={Notifications}
+        hideStatusBar="true"
+        backBehavior="none"
+        options={{
+          drawerIcon: () => (
+            <Ionicons name="notifications" size={30} color={'#fff'} />
+          ),
+          title: 'Уведомления',
         }}
       />
     </MainNavigator.Navigator>

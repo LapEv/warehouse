@@ -17,7 +17,10 @@ export const Authorization = ({ screen, navigation }) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email.trim(), password)
-      .then(() => navigation.navigate('Main'))
+      .then(() => {
+        CONST.isLogged = true;
+        navigation.navigate('Main');
+      })
       .catch((error) => setErrorMessage(error.message));
   };
 
@@ -29,7 +32,10 @@ export const Authorization = ({ screen, navigation }) => {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email.trim(), password)
-        .then(() => navigation.navigate('Main'))
+        .then(() => {
+          CONST.isLogged = true;
+          navigation.navigate('Main');
+        })
         .catch((error) => setErrorMessage(error.message));
     }
   };
