@@ -1,34 +1,145 @@
-import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  Platform,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+  Text,
+} from 'react-native';
 import { Item, HeaderButtons } from 'react-navigation-header-buttons';
 import { DrawerActions } from '@react-navigation/native';
-import { AppHeaderIcon } from './AppHeaderIcon';
+import {
+  AppHeaderIconIonicons,
+  AppHeaderIconMaterialIcons,
+} from './AppHeaderIcon';
 import { CONST } from '../const';
+import Animated from 'react-native-reanimated';
 
-export const CustomHeader = ({ title, navigation }) => {
+export const CustomHeader = ({
+  screen,
+  navigation,
+  state,
+  location,
+  descriptors,
+  title,
+}) => {
+  const animatedWidth = state ? state.routes.length : 1;
+  const width = useWindowDimensions().width;
+
+  const [currentRouteName, setRouteName] = useState('');
+
+  const checkGoBackButton =
+    Platform.OS === 'ios' &&
+    currentRouteName !== 'HomeScreen' &&
+    currentRouteName !== 'PinCodeScreen' &&
+    currentRouteName !== 'LoginScreen'
+      ? true
+      : false;
+
+  const delta = Platform.OS === 'ios' ? 240 : 160;
+
+  useEffect(() => {
+    screen !== undefined ? setRouteName(screen) : '';
+    state !== undefined ? setRouteName(state.routeNames[state.index]) : '';
+  }, [state]);
+
   return (
     <View style={styles.container}>
-      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item
-          title="Toggle Drawer"
-          iconName={CONST.HEADER_OPTIONS.drawerIcon}
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-        />
-      </HeaderButtons>
-      <Text style={styles.title}>{title}</Text>
+      <View
+        style={{
+          zIndex: 3,
+          backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <HeaderButtons HeaderButtonComponent={AppHeaderIconMaterialIcons}>
+            <Item
+              title="Toggle Drawer"
+              iconSize={44}
+              iconName={CONST.HEADER_OPTIONS.drawerIcon}
+              onPress={() => {
+                navigation.dispatch(DrawerActions.toggleDrawer());
+              }}
+            />
+          </HeaderButtons>
+          <HeaderButtons HeaderButtonComponent={AppHeaderIconMaterialIcons}>
+            {checkGoBackButton ? (
+              <Item
+                title="Back"
+                iconSize={30}
+                iconName={CONST.HEADER_OPTIONS.back}
+                onPress={() => {
+                  navigation.goBack();
+                  state ? navigation.setParams({ action: 'goback' }) : '';
+                }}
+              />
+            ) : Platform.OS === 'ios' ? (
+              <View style={{ width: 50 }}></View>
+            ) : (
+              <View></View>
+            )}
+          </HeaderButtons>
+        </View>
+      </View>
+      <Animated.View
+        style={{
+          width: width * animatedWidth,
+          flexDirection: 'row',
+          marginLeft: location,
+          zIndex: 1,
+        }}
+      >
+        {state ? (
+          state.routes.map((route) => {
+            const { options } = descriptors[route.key];
+            return (
+              <View
+                style={{
+                  width: width - delta,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  zIndex: 1,
+                }}
+                key={route.key}
+              >
+                <Animated.Text style={styles.title}>
+                  {options.title}
+                </Animated.Text>
+              </View>
+            );
+          })
+        ) : (
+          <View
+            style={{
+              width: width - delta,
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 1,
+            }}
+          >
+            <Text style={styles.title}>{title}</Text>
+          </View>
+        )}
+      </Animated.View>
       {CONST.isLogged ? (
-        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-          <Item
-            title="Settings"
-            iconName={CONST.HEADER_OPTIONS.settingsIcon}
-            onPress={() => navigation.navigate('Settings')}
-          />
-          <Item
-            title="Notifications"
-            iconName={CONST.HEADER_OPTIONS.notificationsIcon}
-            onPress={() => navigation.navigate('Notifications')}
-          />
-        </HeaderButtons>
+        <View style={styles.rightButtons}>
+          <HeaderButtons HeaderButtonComponent={AppHeaderIconIonicons}>
+            <Item
+              title="Settings"
+              iconSize={30}
+              iconName={CONST.HEADER_OPTIONS.settingsIcon}
+              onPress={() => navigation.navigate('Settings')}
+            />
+            <Item
+              title="Notifications"
+              iconSize={30}
+              iconName={CONST.HEADER_OPTIONS.notificationsIcon}
+              onPress={() => navigation.navigate('Notifications')}
+            />
+          </HeaderButtons>
+        </View>
       ) : (
         <View></View>
       )}
@@ -39,27 +150,46 @@ export const CustomHeader = ({ title, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 80,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#30cfd0',
+    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
     ...Platform.select({
       ios: {
+        height: 90,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.3,
       },
       android: {
+        height: 80,
         elevation: 10,
       },
     }),
     paddingTop: 30,
+    zIndex: 99,
   },
   title: {
-    color: 'white',
-    fontSize: 18,
+    color: CONST.THEME.MAIN.TEXT_COLOR,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'open-bold',
     letterSpacing: 0,
+    zIndex: 1,
+  },
+  rightButtons: {
+    position: 'absolute',
+    right: 0,
+    ...Platform.select({
+      ios: {
+        top: 90 / 2,
+      },
+      android: {
+        top: 80 / 2,
+      },
+    }),
+    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+    zIndex: 3,
   },
 });

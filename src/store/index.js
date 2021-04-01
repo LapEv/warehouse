@@ -1,9 +1,11 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
-import { login } from './reducers/loginReducer.js'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { modalReducer } from './reducers/modal';
+import { themeReducer } from './reducers/theme';
 
 const rootReducer = combineReducers({
-  login: loginReducer
-})
+  modal: modalReducer,
+  theme: themeReducer,
+});
 
-export default createStore(rootReducer, applyMiddleware(thunk))
+export default createStore(rootReducer, applyMiddleware(thunk));

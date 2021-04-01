@@ -1,14 +1,21 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { HeaderButton } from 'react-navigation-header-buttons';
-import { Ionicons } from '@expo/vector-icons';
-import { CONST } from '../const';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-export const AppHeaderIcon = (props) => (
+export const AppHeaderIconIonicons = (props) => (
   <HeaderButton
     {...props} // всё что мы захотим передать в компонент будет в props
-    iconSize={30}
+    iconSize={props.iconSize}
     IconComponent={Ionicons}
+    color={'#fff'}
+  />
+);
+
+export const AppHeaderIconMaterialIcons = (props) => (
+  <HeaderButton
+    {...props} // всё что мы захотим передать в компонент будет в props
+    iconSize={props.iconSize}
+    IconComponent={MaterialIcons}
     color={'#fff'}
   />
 );

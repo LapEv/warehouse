@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Platform, Image, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CONST } from '../const';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
+import { ModalAlert } from '../components/Modal';
 
 export const SettingsScreen = ({ navigation }) => {
   return (
@@ -13,10 +14,10 @@ export const SettingsScreen = ({ navigation }) => {
         navigation={navigation}
       />
       <LinearGradient
-        colors={CONST.MAIN_BACKGROUNDCOLOR}
+        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
         style={CONST.MAIN_BACKGROUNDSTYLES}
       >
-        <Text style={{ color: CONST.TEXT_COLOR }}>Settings Screen!</Text>
+        <View></View>
       </LinearGradient>
     </View>
   );

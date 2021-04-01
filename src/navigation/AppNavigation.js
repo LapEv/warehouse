@@ -1,5 +1,6 @@
-import React from 'react';
-import { Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Dimensions, BackHandler, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CustomDrawer } from '..//components/CustomDrawer';
@@ -9,12 +10,75 @@ import { Login } from '..//navigation/LoginNavigation';
 import { SupportScreen } from '../screens/SupportScreen';
 import { CONST } from '../const';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
+import { ModalAlert } from '../components/Modal';
+import { modalShow } from '../store/actions/modal';
 
 const Drawer = createDrawerNavigator();
 
 export const AppNavigation = () => {
+  const navigationRef = React.createRef();
+  let currentRouteName,
+    historyglobal,
+    historylocal = 0;
+
+  const onStateChange = () => {
+    if (!navigationRef) return;
+    historyglobal = navigationRef.current.getRootState().history.length;
+    historylocal = navigationRef.current
+      .getRootState()
+      .routes[navigationRef.current.getRootState().index].hasOwnProperty(
+        'state'
+      )
+      ? navigationRef.current
+          .getRootState()
+          .routes[
+            navigationRef.current.getRootState().index
+          ].state.hasOwnProperty('history')
+      : 0
+      ? navigationRef.current.getRootState().routes[
+          navigationRef.current.getRootState().index
+        ].state.history.length
+      : 0;
+    currentRouteName = navigationRef.current.getCurrentRoute().name;
+  };
+
+  const dispatch = useDispatch();
+
+  const backAction = () => {
+    if (
+      (historyglobal >= 1 && currentRouteName === 'LoginScreen') ||
+      (historyglobal >= 2 &&
+        historylocal &&
+        currentRouteName === 'HomeScreen') ||
+      (!historylocal && currentRouteName === 'PinCodeScreen')
+    ) {
+      const modalInfo = {
+        show: true,
+        title: 'Внимание',
+        message: 'Вы действительно хотите выйте из приложения?',
+        buttonCancel: 'Нет',
+        buttonYes: 'Да',
+      };
+      dispatch(modalShow(modalInfo));
+    } else {
+      navigationRef.current.goBack();
+      navigationRef.current.setParams({ action: 'goback' });
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef} onStateChange={onStateChange}>
+      <View>
+        <ModalAlert />
+      </View>
       <Drawer.Navigator
         initialRouteName="Login"
         drawerPosition="left"
@@ -77,10 +141,9 @@ export const AppNavigation = () => {
         <Drawer.Screen
           name="Main"
           component={Main}
-          options={{ title: 'Главная' }}
+          // options={(props) => AppOptions(props)}
           backBehavior="none"
           hideStatusBar="true"
-          // options={{ headerShown: false }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

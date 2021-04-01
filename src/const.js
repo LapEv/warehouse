@@ -4,57 +4,60 @@ export const CONST = {
   use_fingerprint: true, // передать в пользовательские настройки
   supportFingerPrint: false,
   KeychainName: 'Ware0809House',
+  // PIN_CODE_status: 'choose', // использовать с БД
+  PIN_CODE_status: 'enter', // использовать с БД
   isLogged: false,
-  // requiredInstallPIN_CODE: true,
-  MAIN_BACKGROUNDCOLOR: ['#30cfd0', '#146185', '#30cfd0'],
+  profileName: 'User',
+  THEME: {
+    MAIN: {
+      BACKGROUNDCOLOR_LG: ['#30cfd0', '#146185', '#30cfd0'],
+      BACKGROUNDCOLOR: '#30cfd0',
+      TEXT_COLOR: 'white',
+      DANGER_COLOR: '#d81b60',
+    },
+    LIGHT: {
+      BACKGROUNDCOLOR_LG: ['#30cfd0', '#146185', '#30cfd0'],
+      BACKGROUNDCOLOR: '#30cfd0',
+      TEXT_COLOR: 'black',
+      DANGER_COLOR: '#d81b60',
+    },
+    DARK: {
+      BACKGROUNDCOLOR_LG: ['#30cfd0', '#146185', '#30cfd0'],
+      BACKGROUNDCOLOR: '#30cfd0',
+      TEXT_COLOR: 'white',
+      DANGER_COLOR: '#d81b60',
+    },
+  },
   MAIN_BUTTONS_BORDERRADIUS: 25,
   MAIN_BACKGROUNDSTYLES: {
-    // position: 'absolute',
-    // left: 0,
-    // right: 0,
-    // top: 0,
     height: '100%',
-    // width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  TEXT_COLOR: 'white',
-  DANGER_COLOR: '#d81b60',
   SHADOW_FOR_IOS: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
   },
   SCREEN_OPTIONS: {
-    gestureEnabled: false,
-    // headerStyle: {
-    //     backgroundColor: Platform.OS === 'android'
-    //     ? '#0e4a75' : "#fff"
-    // },
     headerStyle: {
       backgroundColor: '#30cfd0',
     },
     headerTintColor: '#fff',
-    // headerTintColor: Platform.OS === 'android'
-    // ? "#fff" : ['#146185', '#30cfd0']
   },
   HEADER_OPTIONS: {
     mainBackground: false,
-    drawerIcon: 'ios-menu',
+    drawerIcon: 'menu',
     settingsIcon: 'md-settings-sharp',
     notificationsIcon: 'notifications',
+    home: 'home',
+    newmoving: 'clipboard-arrow-right-outline',
+    newreceipt: 'library-add',
+    database: 'database',
+    report: 'pie-chart',
+    back: 'arrow-back-ios',
     backgroundColor: ['#30cfd0', '#146185'],
   },
-  // firebaseConfig : {
-  //   apiKey: 'AIzaSyAvYSioiBQ-_r85JpC5qriziK95MMfgM0A',
-  //   authDomain: 'warehouse-6b821.firebaseapp.com',
-  //   databaseURL: 'https://warehouse-6b821.firebaseio.com',
-  //   projectId: 'warehouse-6b821',
-  //   storageBucket: 'warehouse-6b821.appspot.com',
-  //   messagingSenderId: 'sender-id',
-  //   appId: '161171585310',
-  //   measurementId: 'G-measurement-id',
-  // },
   firebaseConfig: {
     apiKey: 'AIzaSyAvYSioiBQ-_r85JpC5qriziK95MMfgM0A',
     authDomain: 'warehouse-6b821.firebaseapp.com',

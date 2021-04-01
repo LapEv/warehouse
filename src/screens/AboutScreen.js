@@ -5,18 +5,22 @@ import { CONST } from '..//const';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
 
-export const AboutScreen = ({ navigation }) => {
+export const AboutScreen = ({ route, navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <CustomHeader
         title={LabelConstants.headerTitle.about}
         navigation={navigation}
+        screen={route.name}
       />
-      <LinearGradient colors={CONST.MAIN_BACKGROUNDCOLOR} style={styles.center}>
-        <Text style={{ color: CONST.TEXT_COLOR }}>
+      <LinearGradient
+        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+        style={styles.center}
+      >
+        <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
           Это лучшее приложение для учета складских ценностей
         </Text>
-        <Text style={{ color: CONST.TEXT_COLOR }}>
+        <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
           Версия приложения <Text style={styles.version}>1.0.0</Text>
         </Text>
       </LinearGradient>

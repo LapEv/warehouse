@@ -5,18 +5,21 @@ import { CONST } from '../const';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
 
-export const SupportScreen = ({ navigation }) => {
+export const SupportScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <CustomHeader
         title={LabelConstants.headerTitle.support}
         navigation={navigation}
+        screen={route.name}
       />
       <LinearGradient
-        colors={CONST.MAIN_BACKGROUNDCOLOR}
+        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
         style={CONST.MAIN_BACKGROUNDSTYLES}
       >
-        <Text style={{ color: CONST.TEXT_COLOR }}>Support Screen!</Text>
+        <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
+          Support Screen!
+        </Text>
       </LinearGradient>
     </View>
   );

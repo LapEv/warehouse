@@ -6,8 +6,9 @@ import { Platform } from 'react-native';
 import { FloatLabelInput } from '../components/FloatLabelInput';
 import { LinearGradientButton } from '../components/LinearGradientButton';
 import { CONST } from '../const';
+import { CustomHeader } from './CustomHeader';
 
-export const Authorization = ({ screen, navigation }) => {
+export const Authorization = ({ route, screen, navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,14 +19,15 @@ export const Authorization = ({ screen, navigation }) => {
       .auth()
       .signInWithEmailAndPassword(email.trim(), password)
       .then(() => {
-        CONST.isLogged = true;
-        navigation.navigate('Main');
+        navigation.navigate(
+          CONST.use_PIN_CODE ? 'PinCodeScreen' : 'HomeMainScreen'
+        );
       })
       .catch((error) => setErrorMessage(error.message));
   };
 
   const handleSignUp = () => {
-    console.log(email, ' ', password, ' ', confirmPassword);
+    // console.log(email, ' ', password, ' ', confirmPassword);
     if (password !== confirmPassword) {
       setErrorMessage(`Passwords don't match`);
     } else {
@@ -33,8 +35,9 @@ export const Authorization = ({ screen, navigation }) => {
         .auth()
         .createUserWithEmailAndPassword(email.trim(), password)
         .then(() => {
-          CONST.isLogged = true;
-          navigation.navigate('Main');
+          navigation.navigate(
+            CONST.use_PIN_CODE ? 'PinCodeScreen' : 'HomeMainScreen'
+          );
         })
         .catch((error) => setErrorMessage(error.message));
     }
@@ -43,15 +46,21 @@ export const Authorization = ({ screen, navigation }) => {
   return (
     <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
       <LinearGradient
-        colors={CONST.MAIN_BACKGROUNDCOLOR}
-        style={CONST.MAIN_BACKGROUNDSTYLES}
+        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+        style={(CONST.MAIN_BACKGROUNDSTYLES, { width: '100%' })}
       >
+        <CustomHeader title="" navigation={navigation} screen={screen} />
         <View style={Platform.OS === 'web' ? styles.web : styles.mobile}>
           <Text style={styles.text}>
             {screen === 'LoginScreen' ? 'Login' : 'Sign Up'}
           </Text>
           {errorMessage && (
-            <Text style={{ color: CONST.DANGER_COLOR, fontWeight: 'bold' }}>
+            <Text
+              style={{
+                color: CONST.THEME.MAIN.DANGER_COLOR,
+                fontWeight: 'bold',
+              }}
+            >
               {errorMessage}
             </Text>
           )}
@@ -90,7 +99,7 @@ export const Authorization = ({ screen, navigation }) => {
               buttonLocation={styles.buttonLocation}
               buttonStyle={styles.buttonStyle}
               buttonTextStyle={styles.buttonText}
-              backgroundColor={CONST.MAIN_BACKGROUNDCOLOR}
+              backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
               onPress={screen === 'LoginScreen' ? handleLogin : handleSignUp}
               text={screen === 'LoginScreen' ? 'Login' : 'Sign Up'}
             />
@@ -103,7 +112,7 @@ export const Authorization = ({ screen, navigation }) => {
                   buttonLocation={styles.buttonOptions}
                   buttonStyle={styles.buttonStyle}
                   buttonTextStyle={styles.buttonText}
-                  backgroundColor={CONST.MAIN_BACKGROUNDCOLOR}
+                  backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
                   onPress={() => navigation.navigate('LoginScreen')}
                   text={'Login'}
                 />
@@ -122,7 +131,7 @@ export const Authorization = ({ screen, navigation }) => {
                     buttonLocation={styles.buttonOptions}
                     buttonStyle={styles.buttonStyle}
                     buttonTextStyle={styles.buttonText}
-                    backgroundColor={CONST.MAIN_BACKGROUNDCOLOR}
+                    backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
                     onPress={() => navigation.navigate('SignUpScreen')}
                     text={'Sign Up'}
                   />
@@ -139,7 +148,7 @@ export const Authorization = ({ screen, navigation }) => {
                     buttonLocation={styles.buttonOptions}
                     buttonStyle={styles.buttonStyle}
                     buttonTextStyle={styles.buttonText}
-                    backgroundColor={CONST.MAIN_BACKGROUNDCOLOR}
+                    backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
                     onPress={() => navigation.navigate('ResetPasswordScreen')}
                     text={'Reset Password'}
                   />
@@ -169,20 +178,21 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    // marginTop: -40,
   },
   floatingItem: {
     width: '70%',
     height: 60,
-    marginTop: 8,
+    marginTop: 20,
     marginVertical: 15,
     paddingLeft: 15,
   },
   floatingInput: {
-    color: CONST.TEXT_COLOR,
+    color: CONST.THEME.MAIN.TEXT_COLOR,
     fontSize: 20,
   },
   text: {
-    color: CONST.TEXT_COLOR,
+    color: CONST.THEME.MAIN.TEXT_COLOR,
     fontSize: 40,
   },
   buttonContainer: {
@@ -192,14 +202,14 @@ const styles = StyleSheet.create({
     width: 150,
     height: heightButton,
     borderRadius: 25,
-    color: 'white',
+    color: CONST.THEME.MAIN.TEXT_COLOR,
   },
   buttonLocation: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: CONST.THEME.MAIN.TEXT_COLOR,
     fontSize: 16,
   },
   buttonStyle: {
@@ -222,7 +232,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingBottom: 25,
     width: '100%',
-    color: 'white',
+    color: CONST.THEME.MAIN.TEXT_COLOR,
   },
   buttonOptions: {
     marginTop: 5,
@@ -231,7 +241,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   textAnswer: {
-    color: CONST.TEXT_COLOR,
+    color: CONST.THEME.MAIN.TEXT_COLOR,
     fontSize: 12,
     marginBottom: 10,
   },
