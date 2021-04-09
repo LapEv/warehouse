@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import PINCode, { hasUserSetPinCode } from '@haskkor/react-native-pincode';
-import { CONST } from '../../const';
+import * as SecureStore from 'expo-secure-store';
+import { SECURITY } from '../../parametrs/security';
 import { CustomHeader } from '../../components/CustomHeader';
+import { PinCodeSettings } from '../../store/actions/security';
+import store from '../../store/index';
 
 export const PinCodeScreen = ({ route, navigation }) => {
   const [showPinLock, setShowPinLock] = useState(false);
-  const [PINCodeStatus, setPINCodeStatus] = useState(CONST.PIN_CODE_status);
+  const pinCodeSettings = useSelector((state) => state.pinCode);
 
-  const pinCodeKeychainName = CONST.KeychainName;
-
-  console.log('PINstatus = ', PINCodeStatus);
+  async function setValueFor(value) {
+    return await SecureStore.setItemAsync(SECURITY.key, JSON.stringify(value));
+  }
 
   const finishProcess = async () => {
-    const hasPin = await hasUserSetPinCode(pinCodeKeychainName);
+    const hasPin = await hasUserSetPinCode(SECURITY.KeychainName);
     if (hasPin) {
-      if (PINCodeStatus === 'choose') {
-        setPINCodeStatus('enter');
+      if (pinCodeSettings.statusPinCode === 'choose') {
+        await store.dispatch(
+          PinCodeSettings({
+            statusPinCode: 'enter',
+            use_FingerPrint: true,
+          })
+        );
+        setValueFor({
+          use_PinCode: true,
+          use_FingerPrint: true,
+        });
       } else {
+        await store.dispatch(
+          PinCodeSettings({
+            pinCodeChangeActive: false,
+          })
+        );
         setShowPinLock(false);
         navigation.navigate('Main');
       }
@@ -30,13 +48,13 @@ export const PinCodeScreen = ({ route, navigation }) => {
 
       {!showPinLock && (
         <PINCode
-          status={PINCodeStatus}
+          status={pinCodeSettings.statusPinCode}
           touchIDDisabled={true}
           // launchTouchID={true}
           // touchIDDisabled={CONST.supportFingerPrint ? false : true}
           // launchTouchID={CONST.supportFingerPrint ? true : false}
           pinCodeVisible={false}
-          pinCodeKeychainName={'Ware0809House'}
+          pinCodeKeychainName={SECURITY.KeychainName}
           // pinCodeKeychainName={'reactNativePinCode'}
           timeLocked={10000}
           maxAttempts={1}

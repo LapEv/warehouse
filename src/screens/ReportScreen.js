@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { CONST } from '../const';
+import { THEME } from '../parametrs/theme';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
 
@@ -13,10 +13,10 @@ export const ReportScreen = ({ navigation }) => {
         navigation={navigation}
       />
       <LinearGradient
-        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
-        style={CONST.MAIN_BACKGROUNDSTYLES}
+        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        style={THEME.MAIN_BACKGROUNDSTYLES}
       >
-        <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
+        <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
           Reports Screen
         </Text>
       </LinearGradient>

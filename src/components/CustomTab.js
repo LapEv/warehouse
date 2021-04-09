@@ -9,7 +9,7 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CustomHeader } from '../components/CustomHeader';
 import Animated from 'react-native-reanimated';
-import { CONST } from '../const';
+import { THEME } from '../parametrs/theme';
 
 export function CustomTab({
   state,
@@ -67,7 +67,7 @@ export function CustomTab({
           justifyContent: 'space-around',
           alignItems: 'center',
           padding: 10,
-          backgroundColor: '#30cfd0',
+          backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
         }}
       >
         {state.routes.map((route, index) => {
@@ -163,6 +163,6 @@ const stylesTab = StyleSheet.create({
         elevation: 15,
       },
     }),
-    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
   },
 });

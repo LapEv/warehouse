@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import firebase from 'firebase';
 import { LinearGradient } from 'expo-linear-gradient';
-import { CONST } from '../../const';
+import { SECURITY } from '../../parametrs/security';
+import { THEME } from '../../parametrs/theme';
+import { PinCodeSettings } from '../../store/actions/security';
 
 export const HomeScreen = () => {
   const { currentUser } = firebase.auth();
-  !CONST.isLogged ? (CONST.isLogged = true) : '';
+
+  const isLogged = useSelector((state) => state.pinCode.isLogged);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    !isLogged ? dispatch(PinCodeSettings({ isLogged: true })) : '';
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
-        style={CONST.MAIN_BACKGROUNDSTYLES}
+        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        style={THEME.MAIN_BACKGROUNDSTYLES}
       >
         <View style={styles.screen}>
-          <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
+          <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
             Hi {currentUser && currentUser.email}!
           </Text>
         </View>

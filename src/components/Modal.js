@@ -9,7 +9,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { LinearGradientButton } from '../components/LinearGradientButton';
-import { CONST } from '../const';
+import { THEME } from '../parametrs/theme';
 import { modalShow } from '../store/actions/modal';
 
 export const ModalAlert = () => {
@@ -82,7 +82,7 @@ export const ModalAlert = () => {
                     buttonLocation={styles.buttonLocation}
                     buttonStyle={styles.buttonStyle}
                     buttonTextStyle={styles.buttonText}
-                    backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+                    backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
                     onPress={() => response(false)}
                     // text={visible.length ? visible[0].buttonCancel : ''}
                     text={modal.buttonCancel}
@@ -91,7 +91,7 @@ export const ModalAlert = () => {
                     buttonLocation={styles.buttonLocation}
                     buttonStyle={styles.buttonStyle}
                     buttonTextStyle={styles.buttonText}
-                    backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+                    backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
                     onPress={() => response(true)}
                     // text={visible.length ? visible[0].buttonYes : ''}
                     text={modal.buttonYes}
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   modalView: {
-    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   modalTitleContainer: {
     minHeight: 50,
     width: '100%',
-    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     justifyContent: 'center',
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   modalTitleText: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 20,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 15,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   buttonText: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 14,
   },
   buttonStyle: {

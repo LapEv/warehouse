@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import { Item, HeaderButtons } from 'react-navigation-header-buttons';
 import { DrawerActions } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import {
   AppHeaderIconIonicons,
   AppHeaderIconMaterialIcons,
 } from './AppHeaderIcon';
 import { CONST } from '../const';
+import { THEME } from '../parametrs/theme';
 import Animated from 'react-native-reanimated';
 
 export const CustomHeader = ({
@@ -43,12 +45,17 @@ export const CustomHeader = ({
     state !== undefined ? setRouteName(state.routeNames[state.index]) : '';
   }, [state]);
 
+  const isLogged = useSelector((state) => state.pinCode.isLogged);
+  const pinCodeChangeActive = useSelector(
+    (state) => state.pinCode.pinCodeChangeActive
+  );
+
   return (
     <View style={styles.container}>
       <View
         style={{
           zIndex: 3,
-          backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+          backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -123,7 +130,7 @@ export const CustomHeader = ({
           </View>
         )}
       </Animated.View>
-      {CONST.isLogged ? (
+      {isLogged && !pinCodeChangeActive ? (
         <View style={styles.rightButtons}>
           <HeaderButtons HeaderButtonComponent={AppHeaderIconIonicons}>
             <Item
@@ -152,7 +159,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     ...Platform.select({
       ios: {
         height: 90,
@@ -169,7 +176,7 @@ const styles = StyleSheet.create({
     zIndex: 99,
   },
   title: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 20,
@@ -189,7 +196,7 @@ const styles = StyleSheet.create({
         top: 80 / 2,
       },
     }),
-    backgroundColor: CONST.THEME.MAIN.BACKGROUNDCOLOR,
+    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     zIndex: 3,
   },
 });

@@ -1,50 +1,6 @@
 export const CONST = {
   ratioScreen: 85,
-  use_PIN_CODE: true, // передать в пользовательские настройки
-  use_fingerprint: true, // передать в пользовательские настройки
-  supportFingerPrint: false,
-  KeychainName: 'Ware0809House',
-  // PIN_CODE_status: 'choose', // использовать с БД
-  PIN_CODE_status: 'enter', // использовать с БД
-  isLogged: false,
   profileName: 'User',
-  THEME: {
-    MAIN: {
-      BACKGROUNDCOLOR_LG: ['#30cfd0', '#146185', '#30cfd0'],
-      BACKGROUNDCOLOR: '#30cfd0',
-      TEXT_COLOR: 'white',
-      DANGER_COLOR: '#d81b60',
-    },
-    LIGHT: {
-      BACKGROUNDCOLOR_LG: ['#30cfd0', '#146185', '#30cfd0'],
-      BACKGROUNDCOLOR: '#30cfd0',
-      TEXT_COLOR: 'black',
-      DANGER_COLOR: '#d81b60',
-    },
-    DARK: {
-      BACKGROUNDCOLOR_LG: ['#30cfd0', '#146185', '#30cfd0'],
-      BACKGROUNDCOLOR: '#30cfd0',
-      TEXT_COLOR: 'white',
-      DANGER_COLOR: '#d81b60',
-    },
-  },
-  MAIN_BUTTONS_BORDERRADIUS: 25,
-  MAIN_BACKGROUNDSTYLES: {
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  SHADOW_FOR_IOS: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-  },
-  SCREEN_OPTIONS: {
-    headerStyle: {
-      backgroundColor: '#30cfd0',
-    },
-    headerTintColor: '#fff',
-  },
   HEADER_OPTIONS: {
     mainBackground: false,
     drawerIcon: 'menu',

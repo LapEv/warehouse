@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { CONST } from '..//const';
+import { THEME } from '..//parametrs/theme';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
 
@@ -14,13 +14,13 @@ export const AboutScreen = ({ route, navigation }) => {
         screen={route.name}
       />
       <LinearGradient
-        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
         style={styles.center}
       >
-        <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
+        <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
           Это лучшее приложение для учета складских ценностей
         </Text>
-        <Text style={{ color: CONST.THEME.MAIN.TEXT_COLOR }}>
+        <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
           Версия приложения <Text style={styles.version}>1.0.0</Text>
         </Text>
       </LinearGradient>

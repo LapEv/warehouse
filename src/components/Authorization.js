@@ -6,6 +6,7 @@ import { Platform } from 'react-native';
 import { FloatLabelInput } from '../components/FloatLabelInput';
 import { LinearGradientButton } from '../components/LinearGradientButton';
 import { CONST } from '../const';
+import { THEME } from '../parametrs/theme';
 import { CustomHeader } from './CustomHeader';
 
 export const Authorization = ({ route, screen, navigation }) => {
@@ -46,8 +47,8 @@ export const Authorization = ({ route, screen, navigation }) => {
   return (
     <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
       <LinearGradient
-        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
-        style={(CONST.MAIN_BACKGROUNDSTYLES, { width: '100%' })}
+        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        style={(THEME.MAIN_BACKGROUNDSTYLES, { width: '100%' })}
       >
         <CustomHeader title="" navigation={navigation} screen={screen} />
         <View style={Platform.OS === 'web' ? styles.web : styles.mobile}>
@@ -57,7 +58,7 @@ export const Authorization = ({ route, screen, navigation }) => {
           {errorMessage && (
             <Text
               style={{
-                color: CONST.THEME.MAIN.DANGER_COLOR,
+                color: THEME.MAIN_THEME.DANGER_COLOR,
                 fontWeight: 'bold',
               }}
             >
@@ -96,10 +97,11 @@ export const Authorization = ({ route, screen, navigation }) => {
           )}
           <View style={styles.buttonContainer}>
             <LinearGradientButton
+              disabled={false}
               buttonLocation={styles.buttonLocation}
               buttonStyle={styles.buttonStyle}
               buttonTextStyle={styles.buttonText}
-              backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+              backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
               onPress={screen === 'LoginScreen' ? handleLogin : handleSignUp}
               text={screen === 'LoginScreen' ? 'Login' : 'Sign Up'}
             />
@@ -109,10 +111,11 @@ export const Authorization = ({ route, screen, navigation }) => {
               <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={styles.textAnswer}> Already have an account?</Text>
                 <LinearGradientButton
+                  disabled={false}
                   buttonLocation={styles.buttonOptions}
                   buttonStyle={styles.buttonStyle}
                   buttonTextStyle={styles.buttonText}
-                  backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+                  backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
                   onPress={() => navigation.navigate('LoginScreen')}
                   text={'Login'}
                 />
@@ -128,10 +131,11 @@ export const Authorization = ({ route, screen, navigation }) => {
                 >
                   <Text style={styles.textAnswer}> Don't have an account?</Text>
                   <LinearGradientButton
+                    disabled={false}
                     buttonLocation={styles.buttonOptions}
                     buttonStyle={styles.buttonStyle}
                     buttonTextStyle={styles.buttonText}
-                    backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+                    backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
                     onPress={() => navigation.navigate('SignUpScreen')}
                     text={'Sign Up'}
                   />
@@ -145,10 +149,11 @@ export const Authorization = ({ route, screen, navigation }) => {
                 >
                   <Text style={styles.textAnswer}> Forgot Password?</Text>
                   <LinearGradientButton
+                    disabled={false}
                     buttonLocation={styles.buttonOptions}
                     buttonStyle={styles.buttonStyle}
                     buttonTextStyle={styles.buttonText}
-                    backgroundColor={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
+                    backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
                     onPress={() => navigation.navigate('ResetPasswordScreen')}
                     text={'Reset Password'}
                   />
@@ -188,11 +193,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   floatingInput: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 20,
   },
   text: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 40,
   },
   buttonContainer: {
@@ -202,14 +207,14 @@ const styles = StyleSheet.create({
     width: 150,
     height: heightButton,
     borderRadius: 25,
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
   },
   buttonLocation: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 16,
   },
   buttonStyle: {
@@ -232,7 +237,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingBottom: 25,
     width: '100%',
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
   },
   buttonOptions: {
     marginTop: 5,
@@ -241,7 +246,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   textAnswer: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 12,
     marginBottom: 10,
   },

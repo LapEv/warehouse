@@ -6,6 +6,8 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { CONST } from '../const';
+import { THEME } from '../parametrs/theme';
+import { SECURITY } from '../parametrs/security';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const CustomDrawer = ({ filteredProps }) => {
@@ -13,10 +15,10 @@ export const CustomDrawer = ({ filteredProps }) => {
     <View style={styles.container}>
       <LinearGradient
         style={{ width: '100%' }}
-        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
-        style={CONST.MAIN_BACKGROUNDSTYLES}
+        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        style={THEME.MAIN_BACKGROUNDSTYLES}
       >
-        {CONST.isLogged ? (
+        {SECURITY.isLogged ? (
           <TouchableOpacity
             style={{
               alignItems: 'center',

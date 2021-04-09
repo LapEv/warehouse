@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dimensions, BackHandler, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -16,6 +16,8 @@ import { modalShow } from '../store/actions/modal';
 const Drawer = createDrawerNavigator();
 
 export const AppNavigation = () => {
+  const pinCodeSettings = useSelector((state) => state.pinCode);
+
   const navigationRef = React.createRef();
   let currentRouteName,
     historyglobal,
@@ -115,7 +117,7 @@ export const AppNavigation = () => {
           component={Login}
           options={{
             drawerIcon: () => <Entypo name="login" size={30} color={'#fff'} />,
-            title: 'Авторизация',
+            title: pinCodeSettings.isLogged ? 'Пин код' : 'Авторизация',
           }}
         />
         <Drawer.Screen

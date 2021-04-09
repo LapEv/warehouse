@@ -1,27 +1,24 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import firebase from 'firebase';
-// import firebase from '@react-native-firebase/auth';
-// import 'firebase/auth';
-import { CONST } from '../../const';
+import { THEME } from '../../parametrs/theme';
 
 export const LoadingScreen = ({ navigation }) => {
+  const use_PinCode = useSelector((state) => state.pinCode.use_PinCode);
+
   firebase.auth().onAuthStateChanged((user) => {
     navigation.navigate(
-      user
-        ? CONST.use_PIN_CODE
-          ? 'PinCodeScreen'
-          : 'HomeScreen'
-        : 'LoginScreen'
+      user ? (use_PinCode ? 'PinCodeScreen' : 'Main') : 'LoginScreen'
     );
   });
 
   return (
     <View style={{ flex: 1 }}>
       <LinearGradient
-        colors={CONST.THEME.MAIN.BACKGROUNDCOLOR_LG}
-        style={CONST.MAIN_BACKGROUNDSTYLES}
+        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        style={THEME.MAIN_BACKGROUNDSTYLES}
       >
         <Text style={styles.text}>Loading</Text>
         <ActivityIndicator color="white" size="large" />
@@ -32,7 +29,7 @@ export const LoadingScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   text: {
-    color: CONST.THEME.MAIN.TEXT_COLOR,
+    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 40,
   },
 });

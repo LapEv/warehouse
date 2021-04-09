@@ -1,12 +1,23 @@
 import * as Font from 'expo-font';
 import firebase from 'firebase';
 import * as LocalAuthentication from 'expo-local-authentication';
-import * as ScreenOrientation from 'expo-screen-orientation';
-
+import * as SecureStore from 'expo-secure-store';
+import { PinCodeSettings } from './store/actions/security';
+import store from './store/index';
+// import * as ScreenOrientation from 'expo-screen-orientation';
 import { CONST } from './const';
+import { SECURITY } from './parametrs/security';
+
+async function SupportFinger() {
+  if (await LocalAuthentication.hasHardwareAsync()) {
+    const supportedAuthentications = await LocalAuthentication.supportedAuthenticationTypesAsync();
+    if (supportedAuthentications.indexOf(1) !== -1) {
+      return await LocalAuthentication.isEnrolledAsync();
+    }
+  }
+}
 
 export async function bootstrap() {
-  //console.log('Start bootstrap')
   try {
     await Font.loadAsync({
       'open-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
@@ -15,6 +26,67 @@ export async function bootstrap() {
     if (!firebase.apps.length) {
       firebase.initializeApp(CONST.firebaseConfig);
     }
+
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   console.log('user = ', user);
+    // });
+
+    // SecureStore.deleteItemAsync(SECURITY.key);
+    // SecureStore.deleteItemAsync(SECURITY.KeychainName);
+
+    if (await SecureStore.isAvailableAsync()) {
+      const result = JSON.parse(await SecureStore.getItemAsync(SECURITY.key));
+      console.log('result = ', result);
+      if (result) {
+        if (!result.use_PinCode) {
+          console.log('Пин код не используется');
+          await store.dispatch(
+            PinCodeSettings({
+              use_PinCode: false,
+              statusPinCode: 'choose',
+              use_FingerPrint: false,
+            })
+          );
+          return;
+        }
+        const pin = await SecureStore.getItemAsync(SECURITY.KeychainName);
+        console.log('pinCode = ', pin);
+        if (pin === null || pin === false) {
+          console.log('Пин код не установлен');
+          await store.dispatch(
+            PinCodeSettings({
+              use_PinCode: true,
+              statusPinCode: 'choose',
+              use_FingerPrint: false,
+            })
+          );
+        } else {
+          console.log('Пин код установлен');
+
+          const supportFingerPrint = await SupportFinger();
+          console.log('supportFingerPrint = ', supportFingerPrint);
+          await store.dispatch(
+            PinCodeSettings({
+              use_PinCode: true,
+              statusPinCode: 'enter',
+              use_FingerPrint: supportFingerPrint
+                ? result.use_FingerPrint
+                : false,
+            })
+          );
+        }
+      }
+      if (result === null) {
+        console.log('First Load');
+        await store.dispatch(
+          PinCodeSettings({
+            statusPinCode: 'choose',
+            use_PinCode: true,
+            use_FingerPrint: true,
+          })
+        );
+      }
+    }
     // try {
     //   await ScreenOrientation.lockAsync(
     //     ScreenOrientation.OrientationLock.PORTRAIT_UP
@@ -22,18 +94,6 @@ export async function bootstrap() {
     // } catch (e) {
     //   console.log('Error: ', e);
     // }
-    if (CONST.use_PIN_CODE) {
-      // считать с базы статус PIN code (choose или enter) и записать в переменную PIN_CODE_status
-      if (CONST.use_fingerprint) {
-        if (await LocalAuthentication.hasHardwareAsync()) {
-          const supportedAuthentications = await LocalAuthentication.supportedAuthenticationTypesAsync();
-          if (supportedAuthentications.indexOf(1) !== -1) {
-            CONST.supportFingerPrint = await LocalAuthentication.isEnrolledAsync();
-          }
-        }
-      }
-    }
-    // console.log(CONST.supportFingerPrint)
   } catch (e) {
     console.log('Error: ', e);
   }
