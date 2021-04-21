@@ -12,11 +12,13 @@ import { CONST } from '../const';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { ModalAlert } from '../components/Modal';
 import { modalShow } from '../store/actions/modal';
+import store from '../store/index';
 
 const Drawer = createDrawerNavigator();
 
 export const AppNavigation = () => {
-  const pinCodeSettings = useSelector((state) => state.pinCode);
+  const pinCodeSettings = store.getState().pinCode;
+  const theme = store.getState().theme;
 
   const navigationRef = React.createRef();
   let currentRouteName,
@@ -103,9 +105,9 @@ export const AppNavigation = () => {
           return <CustomDrawer filteredProps={filteredProps} />;
         }}
         drawerContentOptions={{
-          activeTintColor: 'white',
-          inactiveTintColor: 'white',
-          activeBackgroundColor: '#30cfd0',
+          activeTintColor: theme.ITEM_COLOR,
+          inactiveTintColor: theme.ITEM_COLOR,
+          activeBackgroundColor: theme.BACKGROUNDCOLOR,
           itemStyle: {
             marginTop: 30,
           },
@@ -116,7 +118,9 @@ export const AppNavigation = () => {
           name="Login"
           component={Login}
           options={{
-            drawerIcon: () => <Entypo name="login" size={30} color={'#fff'} />,
+            drawerIcon: () => (
+              <Entypo name="login" size={30} color={theme.ITEM_COLOR} />
+            ),
             title: pinCodeSettings.isLogged ? 'Пин код' : 'Авторизация',
           }}
         />
@@ -126,7 +130,7 @@ export const AppNavigation = () => {
           hideStatusBar="true"
           options={{
             drawerIcon: () => (
-              <MaterialIcons name="email" size={30} color={'#fff'} />
+              <MaterialIcons name="email" size={30} color={theme.ITEM_COLOR} />
             ),
             title: 'Написать в поддержку',
           }}
@@ -136,7 +140,9 @@ export const AppNavigation = () => {
           component={AboutScreen}
           hideStatusBar="true"
           options={{
-            drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,
+            drawerIcon: () => (
+              <Ionicons name="book" size={30} color={theme.ITEM_COLOR} />
+            ),
             title: 'О приложении',
           }}
         />

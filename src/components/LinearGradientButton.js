@@ -27,6 +27,8 @@ export const LinearGradientButton = (props) => {
     },
   })(Button);
 
+  // console.log('props = ', props.onPress);
+
   return Platform.OS === 'web' ? (
     <LinearGradient colors={props.backgroundColor} style={props.buttonStyle}>
       <BootstrapButton disabled={props.disabled} onClick={props.onPress}>

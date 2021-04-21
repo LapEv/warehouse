@@ -14,7 +14,6 @@ import {
   AppHeaderIconMaterialIcons,
 } from './AppHeaderIcon';
 import { CONST } from '../const';
-import { THEME } from '../parametrs/theme';
 import Animated from 'react-native-reanimated';
 
 export const CustomHeader = ({
@@ -49,13 +48,17 @@ export const CustomHeader = ({
   const pinCodeChangeActive = useSelector(
     (state) => state.pinCode.pinCodeChangeActive
   );
+  const use_PinCode = useSelector((state) => state.pinCode.use_PinCode);
+  const theme = useSelector((state) => state.theme);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.BACKGROUNDCOLOR }]}
+    >
       <View
         style={{
           zIndex: 3,
-          backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
+          backgroundColor: theme.BACKGROUNDCOLOR,
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -64,6 +67,7 @@ export const CustomHeader = ({
           <HeaderButtons HeaderButtonComponent={AppHeaderIconMaterialIcons}>
             <Item
               title="Toggle Drawer"
+              color={theme.ITEM_COLOR}
               iconSize={44}
               iconName={CONST.HEADER_OPTIONS.drawerIcon}
               onPress={() => {
@@ -75,6 +79,7 @@ export const CustomHeader = ({
             {checkGoBackButton ? (
               <Item
                 title="Back"
+                color={theme.ITEM_COLOR}
                 iconSize={30}
                 iconName={CONST.HEADER_OPTIONS.back}
                 onPress={() => {
@@ -111,7 +116,9 @@ export const CustomHeader = ({
                 }}
                 key={route.key}
               >
-                <Animated.Text style={styles.title}>
+                <Animated.Text
+                  style={[styles.title, { color: theme.TEXT_COLOR }]}
+                >
                   {options.title}
                 </Animated.Text>
               </View>
@@ -126,29 +133,38 @@ export const CustomHeader = ({
               zIndex: 1,
             }}
           >
-            <Text style={styles.title}>{title}</Text>
+            <Text style={[styles.title, { color: theme.TEXT_COLOR }]}>
+              {title}
+            </Text>
           </View>
         )}
       </Animated.View>
-      {isLogged && !pinCodeChangeActive ? (
-        <View style={styles.rightButtons}>
+      {!isLogged || (pinCodeChangeActive && use_PinCode) ? (
+        <View></View>
+      ) : (
+        <View
+          style={[
+            styles.rightButtons,
+            { backgroundColor: theme.BACKGROUNDCOLOR },
+          ]}
+        >
           <HeaderButtons HeaderButtonComponent={AppHeaderIconIonicons}>
             <Item
               title="Settings"
+              color={theme.ITEM_COLOR}
               iconSize={30}
               iconName={CONST.HEADER_OPTIONS.settingsIcon}
               onPress={() => navigation.navigate('Settings')}
             />
             <Item
               title="Notifications"
+              color={theme.ITEM_COLOR}
               iconSize={30}
               iconName={CONST.HEADER_OPTIONS.notificationsIcon}
               onPress={() => navigation.navigate('Notifications')}
             />
           </HeaderButtons>
         </View>
-      ) : (
-        <View></View>
       )}
     </View>
   );
@@ -159,7 +175,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
+    // backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     ...Platform.select({
       ios: {
         height: 90,
@@ -176,7 +192,7 @@ const styles = StyleSheet.create({
     zIndex: 99,
   },
   title: {
-    color: THEME.MAIN_THEME.TEXT_COLOR,
+    // color: THEME.MAIN_THEME.TEXT_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 20,
@@ -196,7 +212,7 @@ const styles = StyleSheet.create({
         top: 80 / 2,
       },
     }),
-    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
+    // backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     zIndex: 3,
   },
 });

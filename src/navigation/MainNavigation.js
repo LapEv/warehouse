@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useSelector } from 'react-redux';
 import { CustomDrawer } from '..//components/CustomDrawer';
 import { MainTabNavigation } from './MainTabNavigation';
 import { SettingsScreen } from '../screens/SettingsScreen';
@@ -22,6 +23,8 @@ import { LabelConstants } from '../labelConstants';
 const MainNavigator = createDrawerNavigator();
 
 export const Main = () => {
+  const theme = useSelector((state) => state.theme);
+
   return (
     <MainNavigator.Navigator
       initialRouteName="MainTabNavigation"
@@ -50,9 +53,9 @@ export const Main = () => {
         return <CustomDrawer filteredProps={filteredProps} />;
       }}
       drawerContentOptions={{
-        activeTintColor: 'white',
-        inactiveTintColor: 'white',
-        activeBackgroundColor: '#30cfd0',
+        activeTintColor: theme.ITEM_COLOR,
+        inactiveTintColor: theme.ITEM_COLOR,
+        activeBackgroundColor: theme.BACKGROUNDCOLOR,
         // inactiveBackgroundColor: 'silver',
         itemStyle: {
           marginTop: 10,
@@ -72,7 +75,9 @@ export const Main = () => {
         component={MainTabNavigation}
         backBehavior="none"
         options={{
-          drawerIcon: () => <Ionicons name="home" size={30} color={'#fff'} />,
+          drawerIcon: () => (
+            <Ionicons name="home" size={30} color={theme.ITEM_COLOR} />
+          ),
           title: 'Главная',
         }}
       />
@@ -83,7 +88,11 @@ export const Main = () => {
         hideStatusBar="true"
         options={{
           drawerIcon: () => (
-            <MaterialCommunityIcons name="database" size={30} color={'#fff'} />
+            <MaterialCommunityIcons
+              name="database"
+              size={30}
+              color={theme.ITEM_COLOR}
+            />
           ),
           title: LabelConstants.headerTitle.database,
         }}
@@ -95,7 +104,7 @@ export const Main = () => {
         hideStatusBar="true"
         options={{
           drawerIcon: () => (
-            <Ionicons name="pie-chart" size={30} color={'#fff'} />
+            <Ionicons name="pie-chart" size={30} color={theme.ITEM_COLOR} />
           ),
           title: LabelConstants.headerTitle.report,
         }}
@@ -108,7 +117,11 @@ export const Main = () => {
         hideStatusBar="true"
         options={{
           drawerIcon: () => (
-            <Ionicons name="md-settings-sharp" size={30} color={'#fff'} />
+            <Ionicons
+              name="md-settings-sharp"
+              size={30}
+              color={theme.ITEM_COLOR}
+            />
           ),
           title: LabelConstants.headerTitle.settings,
         }}
@@ -120,7 +133,7 @@ export const Main = () => {
         hideStatusBar="true"
         options={{
           drawerIcon: () => (
-            <MaterialIcons name="email" size={30} color={'#fff'} />
+            <MaterialIcons name="email" size={30} color={theme.ITEM_COLOR} />
           ),
           title: LabelConstants.headerTitle.support,
         }}
@@ -131,7 +144,9 @@ export const Main = () => {
         hideStatusBar="true"
         backBehavior="none"
         options={{
-          drawerIcon: () => <Ionicons name="book" size={30} color={'#fff'} />,
+          drawerIcon: () => (
+            <Ionicons name="book" size={30} color={theme.ITEM_COLOR} />
+          ),
           title: LabelConstants.headerTitle.about,
         }}
       />

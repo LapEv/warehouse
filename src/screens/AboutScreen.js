@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSelector } from 'react-redux';
 import { THEME } from '..//parametrs/theme';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
 
 export const AboutScreen = ({ route, navigation }) => {
+  const theme = useSelector((state) => state.theme);
+
   return (
     <View style={{ flex: 1 }}>
       <CustomHeader
@@ -13,14 +16,11 @@ export const AboutScreen = ({ route, navigation }) => {
         navigation={navigation}
         screen={route.name}
       />
-      <LinearGradient
-        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
-        style={styles.center}
-      >
-        <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
+      <LinearGradient colors={theme.BACKGROUNDCOLOR_LG} style={styles.center}>
+        <Text style={{ color: theme.TEXT_COLOR }}>
           Это лучшее приложение для учета складских ценностей
         </Text>
-        <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
+        <Text style={{ color: theme.TEXT_COLOR }}>
           Версия приложения <Text style={styles.version}>1.0.0</Text>
         </Text>
       </LinearGradient>

@@ -5,17 +5,20 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import { useSelector } from 'react-redux';
 import { CONST } from '../const';
 import { THEME } from '../parametrs/theme';
 import { SECURITY } from '../parametrs/security';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const CustomDrawer = ({ filteredProps }) => {
+  const theme = useSelector((state) => state.theme);
+
   return (
     <View style={styles.container}>
       <LinearGradient
         style={{ width: '100%' }}
-        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        colors={theme.BACKGROUNDCOLOR_LG}
         style={THEME.MAIN_BACKGROUNDSTYLES}
       >
         {SECURITY.isLogged ? (

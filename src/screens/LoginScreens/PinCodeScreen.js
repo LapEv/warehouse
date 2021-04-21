@@ -11,6 +11,7 @@ import store from '../../store/index';
 export const PinCodeScreen = ({ route, navigation }) => {
   const [showPinLock, setShowPinLock] = useState(false);
   const pinCodeSettings = useSelector((state) => state.pinCode);
+  const theme = useSelector((state) => state.theme);
 
   async function setValueFor(value) {
     return await SecureStore.setItemAsync(SECURITY.key, JSON.stringify(value));
@@ -23,12 +24,16 @@ export const PinCodeScreen = ({ route, navigation }) => {
         await store.dispatch(
           PinCodeSettings({
             statusPinCode: 'enter',
-            use_FingerPrint: true,
+            use_FingerPrint: pinCodeSettings.support_FingerPrint
+              ? pinCodeSettings.use_PinCode
+              : false,
           })
         );
         setValueFor({
           use_PinCode: true,
-          use_FingerPrint: true,
+          use_FingerPrint: pinCodeSettings.support_FingerPrint
+            ? pinCodeSettings.use_PinCode
+            : false,
         });
       } else {
         await store.dispatch(
@@ -61,23 +66,23 @@ export const PinCodeScreen = ({ route, navigation }) => {
           delayBetweenAttempts={1500}
           titleChoose={'Enter a PIN Code!!!'}
           titleConfirm={'Confirm your PIN Code'}
-          stylePinCodeColorTitle={'white'}
-          stylePinCodeColorSubtitle={'white'}
-          colorPassword={'white'}
-          colorPasswordEmpty={'white'}
+          stylePinCodeColorTitle={theme.TEXT_COLOR}
+          stylePinCodeColorSubtitle={theme.TEXT_COLOR}
+          colorPassword={theme.TEXT_COLOR}
+          colorPasswordEmpty={theme.TEXT_COLOR}
           colorCircleButtons={'rgba(255, 0, 255, 0.0)'}
-          numbersButtonOverlayColor={'#30cfd0'}
+          numbersButtonOverlayColor={theme.BACKGROUNDCOLOR}
           stylePinCodeTextTitle={{ fontWeight: 'bold' }}
           // stylePinCodeTextSubtitle={{fontWeight: 'bold'}}
           stylePinCodeTextButtonCircle={{ fontWeight: '400' }}
-          stylePinCodeButtonNumber={'white'}
-          stylePinCodeDeleteButtonColorShowUnderlay={'white'}
-          stylePinCodeDeleteButtonColorHideUnderlay={'white'}
+          stylePinCodeButtonNumber={theme.TEXT_COLOR}
+          stylePinCodeDeleteButtonColorShowUnderlay={theme.TEXT_COLOR}
+          stylePinCodeDeleteButtonColorHideUnderlay={theme.TEXT_COLOR}
           stylePinCodeDeleteButtonSize={36}
-          styleLockScreenText={{ color: 'white' }}
-          styleLockScreenTextButton={{ color: 'white' }}
-          styleLockScreenTextTimer={{ color: 'white' }}
-          styleLockScreenTitle={{ color: 'white', fontSize: 22 }}
+          styleLockScreenText={{ color: theme.TEXT_COLOR }}
+          styleLockScreenTextButton={{ color: theme.TEXT_COLOR }}
+          styleLockScreenTextTimer={{ color: theme.TEXT_COLOR }}
+          styleLockScreenTitle={{ color: theme.TEXT_COLOR, fontSize: 22 }}
           styleLockScreenViewCloseButton={{ opacity: 1 }}
           styleLockScreenButton={{ backgroundColor: 'rgba(255, 0, 255, 0.0)' }}
           finishProcess={finishProcess}

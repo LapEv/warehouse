@@ -22,6 +22,7 @@ export const SettingsScreen = ({ navigation }) => {
   const [btnChangePinCode, setDisabledBtnChangePinCode] = useState(
     pinCodeSettings.use_PinCode
   );
+  const theme = useSelector((state) => state.theme);
 
   const DATA = [
     {
@@ -32,11 +33,13 @@ export const SettingsScreen = ({ navigation }) => {
     {
       id: 2,
       title: SECURITY.section,
-      data: [
-        SECURITY.use_PinCode,
-        SECURITY.use_FingerPrint,
-        SECURITY.change_PIN_CODE,
-      ],
+      data: pinCodeSettings.support_FingerPrint
+        ? [
+            SECURITY.use_PinCode,
+            SECURITY.use_FingerPrint,
+            SECURITY.change_PIN_CODE,
+          ]
+        : [SECURITY.use_PinCode, SECURITY.change_PIN_CODE],
     },
     {
       id: 3,
@@ -56,9 +59,9 @@ export const SettingsScreen = ({ navigation }) => {
       })
     );
     navigation.navigate('PinCodeScreen');
-
-    console.log('проверить goback');
   };
+
+  console.log('что там с face id у айфона');
 
   useEffect(() => {
     setDisabledBtnChangePinCode(pinCodeSettings.use_PinCode);
@@ -71,7 +74,7 @@ export const SettingsScreen = ({ navigation }) => {
         navigation={navigation}
       />
       <LinearGradient
-        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        colors={theme.BACKGROUNDCOLOR_LG}
         style={THEME.MAIN_BACKGROUNDSTYLES}
       >
         <SectionList
@@ -99,11 +102,12 @@ export const SettingsScreen = ({ navigation }) => {
                 disabled={!btnChangePinCode}
                 buttonLocation={styles.buttonLocation}
                 buttonStyle={styles.buttonStyle}
-                buttonTextStyle={styles.buttonText}
-                backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
-                backgroundColorDisabled={
-                  THEME.MAIN_THEME.BACKGROUNDCOLOR_LG_Disabled
-                }
+                buttonTextStyle={[
+                  styles.buttonText,
+                  { color: theme.TEXT_COLOR },
+                ]}
+                backgroundColor={theme.BACKGROUNDCOLOR_LG}
+                backgroundColorDisabled={theme.BACKGROUNDCOLOR_LG_Disabled}
                 onPress={change_PIN_CODE}
                 text={SECURITY.change_PIN_CODE.name}
               />
@@ -116,12 +120,20 @@ export const SettingsScreen = ({ navigation }) => {
                   style={{
                     height: 0.5,
                     paddingRight: 15,
-                    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
-                    elevation: 15,
+                    backgroundColor: theme.BACKGROUNDCOLOR,
+                    elevation: 5,
                   }}
                 />
               )}
-              <Text style={[styles.headerText, THEME.TITLE_FONT]}>{title}</Text>
+              <Text
+                style={[
+                  styles.headerText,
+                  { color: theme.TEXT_COLOR },
+                  THEME.TITLE_FONT,
+                ]}
+              >
+                {title}
+              </Text>
             </View>
           )}
         />
@@ -140,7 +152,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     paddingTop: 25,
-    color: THEME.MAIN_THEME.TEXT_COLOR,
     width: '100%',
     alignSelf: 'stretch',
   },
@@ -151,7 +162,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   buttonText: {
-    color: THEME.MAIN_THEME.TEXT_COLOR,
     fontSize: 16,
   },
   buttonStyle: {

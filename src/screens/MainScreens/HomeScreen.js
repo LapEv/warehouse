@@ -16,14 +16,16 @@ export const HomeScreen = () => {
     !isLogged ? dispatch(PinCodeSettings({ isLogged: true })) : '';
   }, [dispatch]);
 
+  const theme = useSelector((state) => state.theme);
+
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        colors={theme.BACKGROUNDCOLOR_LG}
         style={THEME.MAIN_BACKGROUNDSTYLES}
       >
         <View style={styles.screen}>
-          <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
+          <Text style={{ color: theme.TEXT_COLOR }}>
             Hi {currentUser && currentUser.email}!
           </Text>
         </View>

@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSelector } from 'react-redux';
 import { THEME } from '../parametrs/theme';
 import { LabelConstants } from '../labelConstants';
 import { CustomHeader } from '../components/CustomHeader';
 
 export const ProfileScreen = ({ navigation }) => {
+  const theme = useSelector((state) => state.theme);
+
   return (
     <View style={styles.container}>
       <CustomHeader
@@ -13,12 +16,10 @@ export const ProfileScreen = ({ navigation }) => {
         navigation={navigation}
       />
       <LinearGradient
-        colors={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+        colors={theme.BACKGROUNDCOLOR_LG}
         style={THEME.MAIN_BACKGROUNDSTYLES}
       >
-        <Text style={{ color: THEME.MAIN_THEME.TEXT_COLOR }}>
-          Profile Screen!
-        </Text>
+        <Text style={{ color: theme.TEXT_COLOR }}>Profile Screen!</Text>
       </LinearGradient>
     </View>
   );

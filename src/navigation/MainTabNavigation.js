@@ -1,5 +1,6 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useSelector } from 'react-redux';
 import { HomeScreen } from '../screens/MainScreens/HomeScreen';
 import { NewMovingScreen } from '../screens/MainScreens/NewMovingScreen';
 import { NewReceiptScreen } from '../screens/MainScreens/NewReceiptScreen';
@@ -15,6 +16,8 @@ const MainTabNavigator = createMaterialTopTabNavigator();
 
 export const MainTabNavigation = ({ navigation }) => {
   let i = 0;
+  const theme = useSelector((state) => state.theme);
+
   return (
     <MainTabNavigator.Navigator
       initialRouteName="HomeScreen"
@@ -40,7 +43,7 @@ export const MainTabNavigation = ({ navigation }) => {
       tabBarOptions={{
         labelStyle: { fontSize: 12 },
         tabStyle: { width: 100, height: 130 },
-        style: { backgroundColor: '#30cfd0' },
+        style: { backgroundColor: theme.BACKGROUNDCOLOR },
       }}
     >
       <MainTabNavigator.Screen
@@ -48,7 +51,9 @@ export const MainTabNavigation = ({ navigation }) => {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Главная',
-          tabBarIcon: <Ionicons name="home" size={40} color={'#fff'} />,
+          tabBarIcon: (
+            <Ionicons name="home" size={40} color={theme.ITEM_COLOR} />
+          ),
           title: LabelConstants.headerTitle.main,
         }}
       />
@@ -61,7 +66,7 @@ export const MainTabNavigation = ({ navigation }) => {
             <MaterialCommunityIcons
               name="clipboard-arrow-right-outline"
               size={40}
-              color={'#fff'}
+              color={theme.ITEM_COLOR}
             />
           ),
           title: LabelConstants.headerTitle.newMoving,
@@ -73,7 +78,11 @@ export const MainTabNavigation = ({ navigation }) => {
         options={{
           tabBarLabel: 'Поступление',
           tabBarIcon: (
-            <MaterialIcons name="library-add" size={40} color={'#fff'} />
+            <MaterialIcons
+              name="library-add"
+              size={40}
+              color={theme.ITEM_COLOR}
+            />
           ),
           title: LabelConstants.headerTitle.newReceipt,
         }}

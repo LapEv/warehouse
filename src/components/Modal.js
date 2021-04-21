@@ -9,7 +9,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { LinearGradientButton } from '../components/LinearGradientButton';
-import { THEME } from '../parametrs/theme';
+// import { THEME } from '../parametrs/theme';
 import { modalShow } from '../store/actions/modal';
 
 export const ModalAlert = () => {
@@ -26,6 +26,7 @@ export const ModalAlert = () => {
   };
 
   const modal = useSelector((state) => state.modal);
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     modal.show !== modalVisible ? setModalVisible(modal.show) : false;
@@ -63,15 +64,27 @@ export const ModalAlert = () => {
               position: 'absolute',
             }}
           >
-            <View style={styles.modalView}>
-              <View style={styles.modalTitleContainer}>
-                <Text style={styles.modalTitleText}>
+            <View
+              style={[
+                styles.modalView,
+                { backgroundColor: theme.BACKGROUNDCOLOR },
+              ]}
+            >
+              <View
+                style={[
+                  styles.modalTitleContainer,
+                  { backgroundColor: theme.BACKGROUNDCOLOR },
+                ]}
+              >
+                <Text
+                  style={[styles.modalTitleText, { color: theme.TEXT_COLOR }]}
+                >
                   {/* {visible.length ? visible[0].title : ''} */}
                   {modal.title}
                 </Text>
               </View>
               <View style={styles.modalTextContainer}>
-                <Text style={styles.modalText}>
+                <Text style={[styles.modalText, { color: theme.TEXT_COLOR }]}>
                   {/* {visible.length ? visible[0].message : ''} */}
                   {modal.message}
                 </Text>
@@ -81,8 +94,11 @@ export const ModalAlert = () => {
                   <LinearGradientButton
                     buttonLocation={styles.buttonLocation}
                     buttonStyle={styles.buttonStyle}
-                    buttonTextStyle={styles.buttonText}
-                    backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+                    buttonTextStyle={{
+                      color: theme.TEXT_COLOR,
+                      fontSize: 14,
+                    }}
+                    backgroundColor={theme.BACKGROUNDCOLOR_LG}
                     onPress={() => response(false)}
                     // text={visible.length ? visible[0].buttonCancel : ''}
                     text={modal.buttonCancel}
@@ -90,8 +106,11 @@ export const ModalAlert = () => {
                   <LinearGradientButton
                     buttonLocation={styles.buttonLocation}
                     buttonStyle={styles.buttonStyle}
-                    buttonTextStyle={styles.buttonText}
-                    backgroundColor={THEME.MAIN_THEME.BACKGROUNDCOLOR_LG}
+                    buttonTextStyle={{
+                      color: theme.TEXT_COLOR,
+                      fontSize: 14,
+                    }}
+                    backgroundColor={theme.BACKGROUNDCOLOR_LG}
                     onPress={() => response(true)}
                     // text={visible.length ? visible[0].buttonYes : ''}
                     text={modal.buttonYes}
@@ -111,7 +130,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   modalView: {
-    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
+    // backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -125,7 +144,7 @@ const styles = StyleSheet.create({
   modalTitleContainer: {
     minHeight: 50,
     width: '100%',
-    backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
+    // backgroundColor: THEME.MAIN_THEME.BACKGROUNDCOLOR,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     justifyContent: 'center',
@@ -140,7 +159,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   modalTitleText: {
-    color: THEME.MAIN_THEME.TEXT_COLOR,
+    // color: THEME.MAIN_THEME.TEXT_COLOR,
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 20,
@@ -152,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    color: THEME.MAIN_THEME.TEXT_COLOR,
+    // color: THEME.MAIN_THEME.TEXT_COLOR,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 15,
@@ -175,10 +194,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 15,
   },
-  buttonText: {
-    color: THEME.MAIN_THEME.TEXT_COLOR,
-    fontSize: 14,
-  },
+  // buttonText: {
+  //   color: THEME.MAIN_THEME.TEXT_COLOR,
+  //   fontSize: 14,
+  // },
   buttonStyle: {
     borderRadius: 25,
     minWidth: 70,

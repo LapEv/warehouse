@@ -1,14 +1,10 @@
-import { THEME_MAIN, THEME_DARK, THEME_LIGHT } from '../types';
+import { THEME_CURRENT } from '../types';
 
-export const theme = (theme) => {
-  // return (dispatch) => {
-  //   dispatch({
-  //     type: MODAL_SHOW,
-  //     payload: modalInfo,
-  //   });
-  // };
-  return {
-    type: THEME,
-    payload: theme,
+export const ChangeTheme = (theme) => {
+  return async (dispatch) => {
+    dispatch({
+      type: THEME_CURRENT,
+      payload: theme,
+    });
   };
 };
